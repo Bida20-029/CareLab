@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>CareLab | Cart Summary</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f5f1;
+            margin: 0;
+            padding: 0;
+            }
+
+            header {
+            background-color: #2c6e49;
+            padding: 1em;
+            color: white;
+            text-align: center;
+            }
+
+            .cart-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .cart-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            }
+
+            .cart-controls a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            }
+
+            .back-home {
+            background-color: #2c6e49;
+            }
+
+            .add-more {
+            background-color: #3a7e5a;
+            }
+
+            .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+            }
+
+            .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 1rem;
+            }
+
+            .item-details {
+            flex-grow: 1;
+            }
+
+            .item-details h3 {
+            margin: 0 0 0.25rem;
+            }
+
+            .item-details p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #444;
+            }
+
+            .item-total {
+            font-weight: bold;
+            }
+
+            .cart-total {
+            text-align: right;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            font-weight: bold;
+            }
+
+            .checkout-btn {
+            margin-top: 1.5rem;
+            background-color: #2c6e49;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            }
+
+            .checkout-btn:hover {
+            background-color: #1e4f36;
+            }
+
+            @media (max-width: 600px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-total {
+                margin-top: 0.5rem;
+            }
+
+            .cart-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            }
+        </style>
+        </head>
+        <body>
+
+        <header>
+            <h1>Your Cart Summary</h1>
+        </header>
+
+        <section class="cart-container">
+
+            <div class="cart-controls">
+            <a href="index.html" class="back-home">← Back to Home</a>
+            <a href="index.html#products" class="add-more">+ Add More Items</a>
+            </div>
+
+            <div id="cart-items">
+            <!-- JavaScript will populate cart items here -->
+            </div>
+
+            <div class="cart-total" id="cart-total">
+            Total: P0.00
+            </div>
+
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </section>
+
+        <script>
+            const cartItems = [
+            {
+                name: "Eco Disinfectant Spray",
+                image: "media/products/disinfectant.jpg",
+                description: "Kills 99.9% of germs. Environmentally friendly.",
+                price: 55,
+                quantity: 2
+            },
+            {
+                name: "All-Purpose Cleaner",
+                image: "media/products/cleaner.jpg",
+                description: "Non-toxic. Safe for kids and pets.",
+                price: 45,
+                quantity: 1
+            },
+            {
+                name: "Office Deep Clean Service",
+                image: "media/products/deepclean.jpg",
+                description: "Weekly package. Safe products used.",
+                price: 350,
+                quantity: 1
+            }
+            ];
+
+            function updateCart() {
+            const container = document.getElementById("cart-items");
+            const totalBox = document.getElementById("cart-total");
+            container.innerHTML = "";
+            let grandTotal = 0;
+
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                grandTotal += itemTotal;
+
+                const div = document.createElement("div");
+                div.className = "cart-item";
+                div.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div class="item-details">
+                    <h3>${item.name}</h3>
+                    <p>${item.description}</p>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Unit Price: P${item.price.toFixed(2)}</p>
+                </div>
+                <div class="item-total">P${itemTotal.toFixed(2)}</div>
+                `;
+                container.appendChild(div);
+            });
+
+            totalBox.textContent = "Total: P" + grandTotal.toFixed(2);
+            }
+
+            updateCart();
+        </script>
+</body>
+</html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Carelab</title>
+    <style>
+        body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+        position: sticky;
+        top: 20px;
+        margin: 20px auto;
+        width: 90%;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 30px;
+        z-index: 1000;
+        }
+
+        .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        }
+
+        .logo img {
+        height: 120px;
+        }
+
+        .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+        }
+
+        .navbar ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 6px;
+        }
+
+        .navbar ul li a:hover {
+        background-color: #2d6a4f;
+        color: #fff;
+        }
+
+        .cart-icon {
+        font-size: 20px;
+        cursor: pointer;
+        color: #2d6a4f;
+        }
+
+        /* Hero */
+        .hero {
+        padding: 160px 20px 100px;
+        text-align: center;
+        background: radial-gradient(circle at 20% 40%, #e3f5e8 10%, transparent 80%), #e9f5ec;
+        }
+
+        .hero h1 {
+        font-size: 52px;
+        color: #1b4332;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-out;
+        }
+
+        .hero p {
+        font-size: 18px;
+        color: #4a4a4a;
+        max-width: 600px;
+        margin: 0 auto 30px;
+        animation: fadeIn 1.4s ease-out;
+        }
+
+        .cta-button {
+        padding: 12px 24px;
+        background-color: #2d6a4f;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+        background-color: #1b4332;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sections */
+        .section {
+        padding: 80px 20px;
+        max-width: 1000px;
+        margin: auto;
+        }
+
+        .section h2 {
+        font-size: 36px;
+        color: #1b4332;
+        margin-bottom: 20px;
+        }
+
+        .section p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+        }
+
+         /* About Section */
+        .about {
+            background: #fff;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+
+        .values-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: #f1f8f4;
+            border-left: 6px solid #66bb6a;
+            border-radius: 10px;
+            padding: 25px;
+            width: 280px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-card h3 {
+            margin-top: 0;
+            color: #388e3c;
+        }
+
+        .value-card p {
+            color: #555;
+        }
+
+        /* services */
+
+        .services .card,
+        .products .card {
+        margin: 10px;
+        flex: 1 1 300px;
+        max-width: 300px;
+        box-sizing: border-box;
+        }
+
+        .card-grid,
+        .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px; /* This ensures even spacing between cards */
+        padding: 20px;
+        }
+
+        .services {
+        padding: 60px 20px;
+        background-color: #fff;
+        text-align: center;
+        }
+
+        .section-title {
+        font-size: 2em;
+        color: #2a5d34;
+        margin-bottom: 40px;
+        }
+
+        .card-grid {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+        }
+
+        .service-card {
+        background: #f0f9f1;
+        border: 1px solid #c6e4c7;
+        border-radius: 15px;
+        width: 300px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        }
+
+        .service-card:hover {
+        transform: scale(1.02);
+        }
+
+        .service-card h3 {
+        color: #2a5d34;
+        margin-bottom: 10px;
+        }
+
+        .service-card .preview {
+        font-size: 0.95em;
+        color: #555;
+        }
+
+        .service-card .details {
+        display: none;
+        margin-top: 15px;
+        text-align: left;
+        }
+
+        .service-card .details img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        }
+
+        .cart-btn {
+        background-color: #2a5d34;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin-top: 10px;
+        cursor: pointer;
+        }
+
+        .cart-btn:hover {
+        background-color: #1e4726;
+        }
+
+        #products {
+        padding: 50px 20px;
+        background-color: #fff;
+        }
+
+        #products h2 {
+        text-align: center;
+        font-size: 2.5em;
+        color: #2e7d32;
+        margin-bottom: 30px;
+        }
+
+        .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        }
+
+        .product-card {
+        width: 300px;
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+        transform: scale(1.02);
+        }
+
+        .product-image {
+        width: 100%;
+        height: auto;
+        }
+
+        .product-info {
+        padding: 20px;
+        }
+
+        .product-info h3 {
+        color: #2e7d32;
+        margin-top: 0;
+        }
+
+        .product-summary {
+        color: #555;
+        font-size: 0.95em;
+        }
+
+        .toggle-btn {
+        margin-top: 10px;
+        background-color: #2e7d32;
+        color: #fff;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+
+        .product-details {
+        margin-top: 15px;
+        }
+
+        .product-details ul.badges {
+        list-style: none;
+        padding: 0;
+        font-size: 0.85em;
+        color: #444;
+        }
+
+        .product-details ul li {
+        margin-bottom: 5px;
+        }
+
+        .quantity-input {
+        width: 60px;
+        margin-left: 10px;
+        padding: 5px;
+        }
+
+        .price-range {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #333;
+        }
+
+        .note-box {
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: none;
+        }
+
+        .cart-btn {
+        margin-top: 10px;
+        background-color: #388e3c;
+        color: white;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        }
+
+        .hidden {
+        display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+        .product-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        }
+
+        /* Comment Section */
+
+        .comment-section {
+        padding: 40px 20px;
+        background-color: #f4f4f4;
+        border-top: 2px solid #ccc;
+        }
+
+        .comment-section h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #2e5736;
+        }
+
+        .comment-card {
+        background-color: #fff;
+        border-left: 5px solid #2e5736;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease;
+        }
+
+        .comment-card:hover {
+        transform: translateY(-2px);
+        }
+
+        .comment-card h4 {
+        margin: 0 0 8px 0;
+        color: #2e5736;
+        font-size: 18px;
+        }
+
+        .comment-card p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #333;
+        }
+
+        .comment-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+        justify-content: space-between;
+        }
+
+        .comment-card {
+        background-color: #fff;
+        border-left: 5px solid #2e5736;
+        border-radius: 8px;
+        padding: 15px 20px;
+        width: 30%;
+        min-width: 250px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease;
+        }
+
+        .comment-card:hover {
+        transform: translateY(-2px);
+        }
+
+        .comment-card h4 {
+        margin: 0 0 8px 0;
+        color: #2e5736;
+        font-size: 18px;
+        }
+
+        .comment-card .stars {
+        color: #f1c40f;
+        font-size: 16px;
+        margin-bottom: 8px;
+        }
+
+        .comment-card p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #333;
+        }
+
+        /* Email Card */
+        .email-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 40px;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
+        }
+
+        .email-card h3 {
+        color: #2d6a4f;
+        margin-bottom: 10px;
+        }
+
+        .email-card input, .email-card textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        }
+
+        .email-card button {
+        margin-top: 20px;
+        background-color: #2d6a4f;
+        color: white;
+        padding: 12px 24px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        }
+
+        .services-grid,
+        .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+        }
+
+        .service-box,
+        .product-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        padding: 20px;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+        }
+
+        .product-card img {
+        width: 100%;
+        max-height: 150px;
+        object-fit: contain;
+        margin-bottom: 10px;
+        }
+
+        .service-box:hover,
+        .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .service-box h4,
+        .product-card h4 {
+        color: #2d6a4f;
+        margin-bottom: 8px;
+        }
+
+        .footer {
+        background-color: #084c41;
+        color: #ffffff;
+        padding: 40px 20px 20px;
+        font-family: 'Segoe UI', sans-serif;
+        }
+
+        .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+        }
+
+        .footer-section {
+        flex: 1 1 250px;
+        }
+
+        .footer h2,
+        .footer h3 {
+        margin-bottom: 15px;
+        font-weight: 600;
+        }
+
+        .footer p,
+        .footer li {
+        font-size: 14px;
+        line-height: 1.7;
+        }
+
+        .footer ul {
+        list-style: none;
+        padding: 0;
+        }
+
+        .footer a {
+        color: #d9f3ed;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+        }
+
+        .footer .socials {
+        margin-top: 10px;
+        }
+
+        .footer .socials a {
+        margin-right: 10px;
+        display: inline-block;
+        }
+
+        .footer .socials img {
+        width: 24px;
+        height: 24px;
+        filter: brightness(0) invert(1);
+        transition: transform 0.3s;
+        }
+
+        .footer-section.about {
+            background-color: #144d3d;
+            color: #fff;
+        }
+
+
+        .footer .socials img:hover {
+        transform: scale(1.1);
+        }
+
+        .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 13px;
+        color: #c3e3db;
+        }
+    </style>
+    </head>
+    <body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+        <img src="1.png" alt="Carelab Logo" />
+        </div>
+        <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#emailcard">Email Us</a></li>
+        </ul>
+        <a href="cart-summary.html" class="cart-icon">🛒 View Cart</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Welcome to Carelab</h1>
+        <p>We provide professional cleaning services and eco-friendly cleaning products designed for homes, offices, and industries.</p>
+        <button class="cta-button" onclick="document.getElementById('emailcard').scrollIntoView({behavior: 'smooth'})">Email Us</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About CareLab</h2>
+        <div class="values-container">
+        <div class="value-card">
+            <h3>Our Mission</h3>
+            <p>To deliver high-quality cleaning products and services that blend scientific precision with a human touch.</p>
+        </div>
+        <div class="value-card">
+            <h3>Our Vision</h3>
+            <p>To become a household name in Botswana and beyond, known for dependable, eco-conscious cleaning solutions.</p>
+        </div>
+        <div class="value-card">
+            <h3>Our Values</h3>
+            <p>Integrity, consistency, care, innovation — these are the cornerstones of everything we do.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+    <h2 class="section-title">Our Services</h2>
+    <div class="card-grid">
+    <div class="service-card" onclick="toggleDetails(this)">
+        <h3>Office Cleaning</h3>
+        <p class="preview">Professional cleaning for corporate spaces.</p>
+        <div class="details">
+        <img src="test-img.jpg" alt="Office Cleaning">
+        <p><strong>Price Range:</strong> $100 - $500</p>
+        <p><strong>Additional Notes:</strong> Includes desk sanitization, vacuuming, and window cleaning.</p>
+        <button class="cart-btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="service-card" onclick="toggleDetails(this)">
+        <h3>Residential Cleaning</h3>
+        <p class="preview">Deep cleaning services for your home.</p>
+        <div class="details">
+        <img src="test-img.jpg" alt="Home Cleaning">
+        <p><strong>Price Range:</strong> $80 - $300</p>
+        <p><strong>Additional Notes:</strong> Customizable packages available for different home sizes.</p>
+        <button class="cart-btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="service-card" onclick="toggleDetails(this)">
+        <h3>Disinfection Services</h3>
+        <p class="preview">Certified disinfecting for viruses and bacteria.</p>
+        <div class="details">
+        <img src="test-img.jpg" alt="Disinfection">
+        <p><strong>Price Range:</strong> $120 - $600</p>
+        <p><strong>Additional Notes:</strong> Ideal for healthcare, schools, and high-traffic areas.</p>
+        <button class="cart-btn">Add to Cart</button>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+    <section id="products">
+    <h2>Our Products</h2>
+    <div class="product-container">
+
+        <!-- Product Card 1 -->
+        <div class="product-card">
+        <img src="test-img.jpg" alt="Surface Cleaner" class="product-image" />
+        <div class="product-info">
+            <h3>Surface Cleaner</h3>
+            <p class="product-summary">Powerful all-purpose cleaner for home and office use.</p>
+            <button class="toggle-btn" onclick="toggleInfo('product-details-1')">More Info</button>
+
+            <div id="product-details-1" class="product-details hidden">
+            <ul class="badges">
+                <li>✔️ Environmentally Friendly</li>
+                <li>✔️ Child-Safe Formula</li>
+                <li>✔️ Kills 99.9% Germs</li>
+            </ul>
+            <label>Quantity:
+                <input type="number" min="1" value="1" class="quantity-input" />
+            </label>
+            <p class="price-range">Price: <strong>P75.00 - P95.00</strong></p>
+            <textarea class="note-box" placeholder="Add notes (e.g., fragrance preference)"></textarea>
+            <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="product-card">
+        <img src="test-img.jpg" alt="Surface Cleaner" class="product-image" />
+        <div class="product-info">
+            <h3>Surface Cleaner</h3>
+            <p class="product-summary">Powerful all-purpose cleaner for home and office use.</p>
+            <button class="toggle-btn" onclick="toggleInfo('product-details-2')">More Info</button>
+
+            <div id="product-details-2" class="product-details hidden">
+            <ul class="badges">
+                <li>✔️ Environmentally Friendly</li>
+                <li>✔️ Child-Safe Formula</li>
+                <li>✔️ Kills 99.9% Germs</li>
+            </ul>
+            <label>Quantity:
+                <input type="number" min="1" value="1" class="quantity-input" />
+            </label>
+            <p class="price-range">Price: <strong>P75.00 - P95.00</strong></p>
+            <textarea class="note-box" placeholder="Add notes (e.g., fragrance preference)"></textarea>
+            <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card">
+        <img src="test-img.jpg" alt="Surface Cleaner" class="product-image" />
+        <div class="product-info">
+            <h3>Surface Cleaner</h3>
+            <p class="product-summary">Powerful all-purpose cleaner for home and office use.</p>
+            <button class="toggle-btn" onclick="toggleInfo('product-details-3')">More Info</button>
+
+            <div id="product-details-3" class="product-details hidden">
+            <ul class="badges">
+                <li>✔️ Environmentally Friendly</li>
+                <li>✔️ Child-Safe Formula</li>
+                <li>✔️ Kills 99.9% Germs</li>
+            </ul>
+            <label>Quantity:
+                <input type="number" min="1" value="1" class="quantity-input" />
+            </label>
+            <p class="price-range">Price: <strong>P75.00 - P95.00</strong></p>
+            <textarea class="note-box" placeholder="Add notes (e.g., fragrance preference)"></textarea>
+            <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="product-card">
+        <img src="test-img.jpg" alt="Surface Cleaner" class="product-image" />
+        <div class="product-info">
+            <h3>Surface Cleaner</h3>
+            <p class="product-summary">Powerful all-purpose cleaner for home and office use.</p>
+            <button class="toggle-btn" onclick="toggleInfo('product-details-4')">More Info</button>
+
+            <div id="product-details-4" class="product-details hidden">
+            <ul class="badges">
+                <li>✔️ Environmentally Friendly</li>
+                <li>✔️ Child-Safe Formula</li>
+                <li>✔️ Kills 99.9% Germs</li>
+            </ul>
+            <label>Quantity:
+                <input type="number" min="1" value="1" class="quantity-input" />
+            </label>
+            <p class="price-range">Price: <strong>P75.00 - P95.00</strong></p>
+            <textarea class="note-box" placeholder="Add notes (e.g., fragrance preference)"></textarea>
+            <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Card 5 -->
+        <div class="product-card">
+        <img src="test-img.jpg" alt="Surface Cleaner" class="product-image" />
+        <div class="product-info">
+            <h3>Surface Cleaner</h3>
+            <p class="product-summary">Powerful all-purpose cleaner for home and office use.</p>
+            <button class="toggle-btn" onclick="toggleInfo('product-details-5')">More Info</button>
+
+            <div id="product-details-5" class="product-details hidden">
+            <ul class="badges">
+                <li>✔️ Environmentally Friendly</li>
+                <li>✔️ Child-Safe Formula</li>
+                <li>✔️ Kills 99.9% Germs</li>
+            </ul>
+            <label>Quantity:
+                <input type="number" min="1" value="1" class="quantity-input" />
+            </label>
+            <p class="price-range">Price: <strong>P75.00 - P95.00</strong></p>
+            <textarea class="note-box" placeholder="Add notes (e.g., fragrance preference)"></textarea>
+            <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Card 6 -->
+        <div class="product-card">
+        <img src="test-img.jpg" alt="Surface Cleaner" class="product-image" />
+        <div class="product-info">
+            <h3>Surface Cleaner</h3>
+            <p class="product-summary">Powerful all-purpose cleaner for home and office use.</p>
+            <button class="toggle-btn" onclick="toggleInfo('product-details-6')">More Info</button>
+
+            <div id="product-details-6" class="product-details hidden">
+            <ul class="badges">
+                <li>✔️ Environmentally Friendly</li>
+                <li>✔️ Child-Safe Formula</li>
+                <li>✔️ Kills 99.9% Germs</li>
+            </ul>
+            <label>Quantity:
+                <input type="number" min="1" value="1" class="quantity-input" />
+            </label>
+            <p class="price-range">Price: <strong>P75.00 - P95.00</strong></p>
+            <textarea class="note-box" placeholder="Add notes (e.g., fragrance preference)"></textarea>
+            <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    </section>
+
+    <!-- Comment Section -->
+    <section class="comment-section">
+    <div id="comments-list" class="comment-grid">
+        <div class="comment-card">
+            <h4>Lesego</h4>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>Absolutely loved the lemon-scented disinfectant — fresh and long-lasting!</p>
+        </div>
+        <div class="comment-card">
+            <h4>Thato</h4>
+            <div class="stars">⭐⭐⭐⭐</div>
+            <p>Quick delivery and my floors have never looked better. Highly recommend CareLab!</p>
+        </div>
+        <div class="comment-card">
+            <h4>Kesaobaka</h4>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>The team was professional and on time for our office deep clean. Will book again.</p>
+        </div>
+        </div>
+    </section>
+
+
+
+    <!-- Email Card Section -->
+    <section class="section" id="emailcard">
+        <div class="email-card">
+        <h3>Send us a quick message</h3>
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <textarea rows="4" placeholder="How can we help you?"></textarea>
+        <button>Send Email</button>
+        </div>
+    </section>
+
+    <<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+        <h2>CareLab</h2>
+        <p>Innovating care through science. Dedicated to better health and community well-being.</p>
+        </div>
+        <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        </div>
+        <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p>Plot 123, Gaborone, Botswana</p>
+        <p>Phone: +267 7123 4567</p>
+        <p>Email: info@carelab.co.bw</p>
+        <div class="socials">
+            <a href="#"><img src="icons/facebook.svg" alt="Facebook"></a>
+            <a href="#"><img src="icons/instagram.svg" alt="Instagram"></a>
+            <a href="#"><img src="icons/whatsapp.svg" alt="WhatsApp"></a>
+        </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 CareLab. All Rights Reserved.</p>
+    </div>
+    </footer>
+
+
+    <script>
+    function toggleDetails(card) {
+    const details = card.querySelector('.details');
+    const allCards = document.querySelectorAll('.service-card .details');
+
+    // Hide other open cards
+    allCards.forEach(el => {
+        if (el !== details) el.style.display = "none";
+    });
+
+    // Toggle this card
+    if (details.style.display === "block") {
+        details.style.display = "none";
+    } else {
+        details.style.display = "block";
+    }
+    }
+
+    function toggleInfo(id) {
+    const allDetails = document.querySelectorAll('.product-details');
+    allDetails.forEach(detail => {
+        if (detail.id !== id) detail.classList.add('hidden');
+    });
+
+    const element = document.getElementById(id);
+    element.classList.toggle('hidden');
+    }
+
+    document.getElementById('comment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const comment = document.getElementById('comment').value.trim();
+
+    if (name && comment) {
+        const commentBox = document.createElement('div');
+        commentBox.className = 'comment';
+        commentBox.innerHTML = `<strong>${name}</strong><p>${comment}</p>`;
+        document.getElementById('comments-list').prepend(commentBox);
+
+        // Reset the form
+        document.getElementById('comment-form').reset();
+        }
+    });
+
+    </script>
+
+
+</body>
+</html>
