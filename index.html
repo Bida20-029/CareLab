@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Carelab</title>
     <style>
         body {
@@ -387,86 +388,63 @@
 
         /* Comment Section */
 
-        .comment-section {
+        .feedback-section {
         padding: 40px 20px;
-        background-color: #f4f4f4;
-        border-top: 2px solid #ccc;
+        background-color: #f5f5f5;
+        text-align: center;
         }
 
-        .comment-section h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
+        .section-title {
+        font-size: 28px;
+        margin-bottom: 5px;
         color: #2e5736;
-        }
-
-        .comment-card {
-        background-color: #fff;
-        border-left: 5px solid #2e5736;
-        border-radius: 8px;
-        padding: 15px 20px;
-        margin-bottom: 15px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: transform 0.2s ease;
-        }
-
-        .comment-card:hover {
-        transform: translateY(-2px);
-        }
-
-        .comment-card h4 {
-        margin: 0 0 8px 0;
-        color: #2e5736;
-        font-size: 18px;
-        }
-
-        .comment-card p {
-        margin: 0;
-        font-size: 15px;
-        line-height: 1.4;
-        color: #333;
         }
 
         .comment-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
-        margin-top: 30px;
-        justify-content: space-between;
+        gap: 25px;
+        justify-content: center;
         }
 
         .comment-card {
-        background-color: #fff;
-        border-left: 5px solid #2e5736;
-        border-radius: 8px;
-        padding: 15px 20px;
-        width: 30%;
-        min-width: 250px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: transform 0.2s ease;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        width: 300px;
+        height: 130px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease-in-out;
         }
 
         .comment-card:hover {
-        transform: translateY(-2px);
+        transform: scale(1.03);
         }
 
-        .comment-card h4 {
-        margin: 0 0 8px 0;
+        .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        }
+
+        .comment-header h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
         color: #2e5736;
-        font-size: 18px;
         }
 
-        .comment-card .stars {
+        .stars {
         color: #f1c40f;
         font-size: 16px;
-        margin-bottom: 8px;
         }
 
-        .comment-card p {
-        margin: 0;
-        font-size: 15px;
-        line-height: 1.4;
-        color: #333;
-        }
 
         /* Email Card */
         .email-card {
@@ -859,25 +837,35 @@
     </section>
 
     <!-- Comment Section -->
-    <section class="comment-section">
-    <div id="comments-list" class="comment-grid">
+    <section class="feedback-section">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="comment-grid">
         <div class="comment-card">
-            <h4>Lesego</h4>
+        <div class="comment-header">
+            <h4>John Doe</h4>
             <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>Absolutely loved the lemon-scented disinfectant — fresh and long-lasting!</p>
         </div>
+        <p>"Absolutely loved the products! Fast delivery and great customer service."</p>
+        </div>
+
         <div class="comment-card">
-            <h4>Thato</h4>
+        <div class="comment-header">
+            <h4>Maria K.</h4>
             <div class="stars">⭐⭐⭐⭐</div>
-            <p>Quick delivery and my floors have never looked better. Highly recommend CareLab!</p>
         </div>
+        <p>"Their all-purpose cleaner is a game-changer. Sparkling clean results!"</p>
+        </div>
+
         <div class="comment-card">
-            <h4>Kesaobaka</h4>
+        <div class="comment-header">
+            <h4>Thabo M.</h4>
             <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>The team was professional and on time for our office deep clean. Will book again.</p>
         </div>
+        <p>"Reliable service and amazing quality. Highly recommended!"</p>
         </div>
+    </div>
     </section>
+
 
 
 
@@ -913,9 +901,9 @@
         <p>Phone: +267 7123 4567</p>
         <p>Email: info@carelab.co.bw</p>
         <div class="socials">
-            <a href="#"><img src="icons/facebook.svg" alt="Facebook"></a>
-            <a href="#"><img src="icons/instagram.svg" alt="Instagram"></a>
-            <a href="#"><img src="icons/whatsapp.svg" alt="WhatsApp"></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
         </div>
         </div>
     </div>
